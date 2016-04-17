@@ -33,22 +33,28 @@ public:
 
 	// Methods
 	bool LoadFromFile (
-		const char * filepath,
-		bool         colorKeying = false,
-		uint8_t      r           = 0xFF,
-		uint8_t      g           = 0x00,
-		uint8_t      b           = 0xFF
+		SDL_Renderer * renderer,
+		const char *   filepath,
+		bool           colorKeying = false,
+		uint8_t        r           = 0xFF,
+		uint8_t        g           = 0x00,
+		uint8_t        b           = 0xFF
 	);
 
 	void Free ();
 
+	void SetColor (uint8_t r, uint8_t g, uint8_t b);
+	void SetAlpha (uint8_t a);
+	void SetBlendMode (SDL_BlendMode blendMode);
+
 	void Render (
+		SDL_Renderer *    renderer,
 		unsigned          x,
 		unsigned          y,
 		const SDL_Rect *  srcRect    = nullptr,
 		double            rotDegrees = 0.0,
 		const SDL_Point * rotCenter  = nullptr,
-		SDL_RenderFlip    flip       = SDL_FLIP_NONE
+		SDL_RendererFlip  flip       = SDL_FLIP_NONE
 	) const;
 };
 

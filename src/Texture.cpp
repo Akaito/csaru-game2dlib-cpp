@@ -2,20 +2,41 @@
 
 #include "../include/Texture.hpp"
 
+
+namespace CSaru2d {
+
 //===========================================================================
-TextureWrapper::TextureWrapper () :
+Texture::Texture () :
 	m_texture(nullptr),
 	m_width(0),
 	m_height(0)
 {}
 
 //===========================================================================
-TextureWrapper::~TextureWrapper () {
+Texture::~Texture () {
 	Free();
 }
 
 //===========================================================================
-bool TextureWrapper::LoadFromFile (const char * path, bool colorKeying, uint8_t r, uint8_t g, uint8_t b) {
+void Texture::Free () {
+	if (!m_texture)
+		return;
+
+	SDL_DestroyTexture(m_texture);
+	m_texture = nullptr;
+	m_width   = 0;
+	m_height  = 0;
+}
+
+//===========================================================================
+bool Texture::LoadFromFile (
+	SDL_Renderer * renderer,
+	const char * path,
+	bool colorKeying,
+	uint8_t r,
+	uint8_t g,
+	uint8_t b
+) {
 
 	Free();
 
@@ -34,7 +55,7 @@ bool TextureWrapper::LoadFromFile (const char * path, bool colorKeying, uint8_t 
 		);
 	}
 
-	m_texture = SDL_CreateTextureFromSurface(g_renderer, tempSurface);
+	m_texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
 	if (!m_texture) {
 		printf("SDL failed to create a texture from surface for {%s}.  %s\n", path, SDL_GetError());
 		SDL_FreeSurface(tempSurface);
@@ -51,18 +72,8 @@ bool TextureWrapper::LoadFromFile (const char * path, bool colorKeying, uint8_t 
 }
 
 //===========================================================================
-void TextureWrapper::Free () {
-	if (!m_texture)
-		return;
-
-	SDL_DestroyTexture(m_texture);
-	m_texture = nullptr;
-	m_width   = 0;
-	m_height  = 0;
-}
-
-//===========================================================================
-void TextureWrapper::Render (
+void Texture::Render (
+	SDL_Renderer *    renderer,
 	unsigned          x,
 	unsigned          y,
 	const SDL_Rect *  srcRect,
@@ -77,7 +88,24 @@ void TextureWrapper::Render (
 		destRect.h = srcRect->h;
 	}
 
-	SDL_RenderCopyEx(g_renderer, m_texture, srcRect, &destRect, rotDegrees, rotCenter, flip);
+	SDL_RenderCopyEx(renderer, m_texture, srcRect, &destRect, rotDegrees, rotCenter, flip);
 
 }
+
+//===========================================================================
+void Texture::SetAlpha (uint8_t a) {
+	SDL_SetTextureAlphaMod(m_texture, a);
+}
+
+//===========================================================================
+void Texture::SetBlendMode (SDL_BlendMode blendMode) {
+	SDL_SetTextureBlendMode(m_texture, blendMode);
+}
+
+//===========================================================================
+void Texture::SetColor (uint8_t r, uint8_t g, uint8_t b) {
+	SDL_SetTextureColorMod(m_texture, r, g, b);
+}
+
+} // namespace CSaru2d
 

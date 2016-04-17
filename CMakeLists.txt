@@ -3,11 +3,11 @@ cmake_minimum_required(VERSION 3.2)
 # Could file(GLOB_RECURSE ...) for these, but specifying each one
 #	manually means the build system knows when something changes.
 set(src_files
-	src/foo.cpp
-	src/bar.cpp
+	src/Texture.cpp
 )
 set(header_files
 	include/csaru-game2dlib-cpp.h
+	include/Texture.hpp
 )
 
 # CSaruDir must be set in your environment variables!  It should point to a
