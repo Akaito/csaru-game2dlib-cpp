@@ -39,6 +39,12 @@ public:
 		uint8_t        r           = 0xFF,
 		uint8_t        g           = 0x00,
 		uint8_t        b           = 0xFF
+	)
+	bool LoadFromRenderedText (
+		SDL_Renderer * renderer,
+		TTF_Font *     sdlFont,
+		const char *   textureText,
+		SDL_Color      textColor
 	);
 
 	void Free ();
