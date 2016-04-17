@@ -22,6 +22,8 @@ CSaru_Lib(0.1 "${src_files}" "${header_files}")
 
 # Custom stuff hand-edited into this CMakeLists ...
 
+CSaru_Depends("csaru-core-cpp")
+
 set(CXX_STANDARD_REQUIRED true)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 
