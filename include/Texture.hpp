@@ -8,11 +8,14 @@
 #ifdef WIN32
 #	include <SDL.h>
 #	include <SDL_image.h>
+#	include <SDL_ttf.h>
 #	undef main
 #else
 #	include <SDL2/SDL.h>
 #	include <SDL2/SDL_image.h>
+#	include <SDL2/SDL_ttf.h>
 #endif
+
 
 namespace CSaru2d {
 
@@ -39,7 +42,7 @@ public:
 		uint8_t        r           = 0xFF,
 		uint8_t        g           = 0x00,
 		uint8_t        b           = 0xFF
-	)
+	);
 	bool LoadFromRenderedText (
 		SDL_Renderer * renderer,
 		TTF_Font *     sdlFont,

@@ -57,7 +57,7 @@ bool Texture::LoadFromFile (
 
 	m_texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
 	if (!m_texture) {
-		SDL_LogError(SDL_LOG_CATEOGRY_ERROR, "SDL failed to create a texture from surface for {%s}.  %s\n", path, SDL_GetError());
+		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL failed to create a texture from surface for {%s}.  %s\n", path, SDL_GetError());
 		SDL_FreeSurface(tempSurface);
 		return false;
 	}
@@ -82,7 +82,7 @@ bool Texture::LoadFromRenderedText (
 	Free();
 
 	// Render text surface
-	SDL_Surface * textSurface = TTF_RenderText_Solid(font, textureText, textColor);
+	SDL_Surface * textSurface = TTF_RenderText_Solid(sdlFont, textureText, textColor);
 	if (!textSurface) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
 		return false;
