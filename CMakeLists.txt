@@ -4,10 +4,12 @@ cmake_minimum_required(VERSION 3.2)
 #	manually means the build system knows when something changes.
 set(src_files
 	src/Texture.cpp
+	src/TextureAnimation.cpp
 )
 set(header_files
 	include/csaru-game2dlib-cpp.h
 	include/Texture.hpp
+	include/TextureAnimation.hpp
 )
 
 # CSaruDir must be set in your environment variables!  It should point to a
