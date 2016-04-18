@@ -5,11 +5,13 @@ cmake_minimum_required(VERSION 3.2)
 set(src_files
 	src/Texture.cpp
 	src/TextureAnimation.cpp
+	src/Transform.cpp
 )
 set(header_files
 	include/csaru-game2dlib-cpp.h
 	include/Texture.hpp
 	include/TextureAnimation.hpp
+	include/Transform.hpp
 )
 
 # CSaruDir must be set in your environment variables!  It should point to a
@@ -23,6 +25,9 @@ include($ENV{CSaruDir}/cmake/CSaru.cmake)
 CSaru_Lib(0.1 "${src_files}" "${header_files}")
 
 # Custom stuff hand-edited into this CMakeLists ...
+
+# Add <CSaruDir>/pkg/vendor/CML/ to compiler's paths for include-searching
+CSaru_UseVendor("CML")
 
 CSaru_Depends("csaru-core-cpp")
 
