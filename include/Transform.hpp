@@ -2,7 +2,7 @@
 
 #include <cml/cml.h> // Configurable Math Library
 
-namespace CSaru2d {
+namespace CSaruGame {
 
 class Transform {
 
@@ -18,7 +18,7 @@ public:
     // Construction
     Transform();
     virtual ~Transform();
-    
+
     // Queries
     void                  GetWorldFromModelMtx (cml::matrix44f_c * worldMatrixOut) const;
     const cml::vector3f & GetPosition () const     { return m_position; }
@@ -36,5 +36,5 @@ public:
 
 };
 
-} // namespace CSaru2d
+} // namespace CSaruGame
 

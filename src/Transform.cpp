@@ -1,6 +1,6 @@
 #include "../include/Transform.hpp"
 
-namespace CSaru2d {
+namespace CSaruGame {
 
 //==============================================================================
 Transform::Transform () : m_rotation(0.0f) {
@@ -56,5 +56,5 @@ void Transform::SetVelocity (float x, float y) {
     m_velocity.set(x, y, 0.0f);
 }
 
-} // namespace CSaru2d
+} // namespace CSaruGame
 

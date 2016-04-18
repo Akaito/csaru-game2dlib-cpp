@@ -3,12 +3,15 @@ cmake_minimum_required(VERSION 3.2)
 # Could file(GLOB_RECURSE ...) for these, but specifying each one
 #	manually means the build system knows when something changes.
 set(src_files
+	src/GameObject.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
 	src/Transform.cpp
 )
 set(header_files
 	include/csaru-game2dlib-cpp.h
+	include/GameObject.hpp
+	include/GameObjectComponent.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp
 	include/Transform.hpp
