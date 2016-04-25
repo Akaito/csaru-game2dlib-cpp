@@ -4,6 +4,8 @@ namespace CSaruGame {
 
 class Timer {
 private:
+	// ~584 years to overflow?
+	// Saw 1,000,000 ticks per millisecond on a Surface Pro 3 running Ubuntu at 4.2.0-35-generic
 	uint64_t m_ticksAccumulated = 0;
 	uint64_t m_frequency        = 0; // ticks per second
 	uint64_t m_sdlCounterLast   = 0; // Counter at last Unpause
