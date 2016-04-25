@@ -11,15 +11,19 @@ private:
 	uint64_t m_sdlCounterLast   = 0; // Counter at last Unpause
 	bool     m_paused           = true;
 
+	uint64_t m_delta = 0; // convenience to get delta from last Advance call
+
 public:
 	Timer ()              = default;
 	Timer (const Timer &) = default;
 
 	// Queries
-	uint64_t GetTicks () const  { return m_ticksAccumulated; }
+	uint64_t GetTicks () const      { return m_ticksAccumulated; }
+	uint64_t GetTicksDelta () const { return m_delta; }
 	uint64_t GetTicksPerSecond () const;
 	uint64_t GetSeconds () const;
 	uint64_t GetMs () const;
+	uint64_t GetMsDelta () const;
 	bool     GetPaused () const { return m_paused; }
 
 	// Commands

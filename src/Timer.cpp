@@ -17,14 +17,25 @@ void Timer::Advance () {
 		return;
 
 	uint64_t now = SDL_GetPerformanceCounter();
-	if (m_sdlCounterLast)
-		m_ticksAccumulated += (now - m_sdlCounterLast);
+	if (m_sdlCounterLast) {
+		m_delta            = (now - m_sdlCounterLast);
+		m_ticksAccumulated += m_delta;
+	}
+	else {
+		m_delta = 0;
+	}
+
 	m_sdlCounterLast   = now;
 }
 
 //===========================================================================
 uint64_t Timer::GetMs () const {
 	return m_ticksAccumulated / (m_frequency / 1000);
+}
+
+//===========================================================================
+uint64_t Timer::GetMsDelta () const {
+	return m_delta / (m_frequency / 1000);
 }
 
 //===========================================================================
@@ -51,6 +62,7 @@ void Timer::SetPaused (bool paused) {
 void Timer::Reset () {
 	m_ticksAccumulated = 0;
 	m_sdlCounterLast   = 0;
+	m_delta            = 0;
 
 	if (!m_paused)
 		m_sdlCounterLast = SDL_GetPerformanceCounter();
