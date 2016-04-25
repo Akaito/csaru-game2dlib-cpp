@@ -6,6 +6,7 @@ set(src_files
 	src/GameObject.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
+	src/Timer.cpp
 	src/Transform.cpp
 )
 set(header_files
@@ -14,6 +15,7 @@ set(header_files
 	include/GameObjectComponent.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp
+	include/Timer.hpp
 	include/Transform.hpp
 )
 
