@@ -14,10 +14,22 @@ void GameObject::AddComponent (GameObjectComponent * component) {
 }
 
 //==============================================================================
-GameObjectComponent * GameObject::GetComponent (unsigned componentType) {
+GameObjectComponent * GameObject::GetComponentByType (ObjId globalTypeId) {
 
     for (GameObjectComponent * goc : m_components) {
-        if (goc->GetGlobalTypeId() == componentType)
+        if (goc->GetGlobalTypeId() == globalTypeId)
+            return goc;
+    }
+
+    return nullptr;
+
+}
+
+//==============================================================================
+GameObjectComponent * GameObject::GetComponentExact (ObjId id) {
+
+    for (GameObjectComponent * goc : m_components) {
+        if (goc->GetId() == id)
             return goc;
     }
 

@@ -27,6 +27,7 @@ public:
     const cml::vector3f & GetVelocity () const     { return m_velocity; }
 
     // Commands
+	void SetPosition (float x, float y, float z);
     void SetPosition (const cml::vector3f & position);
     void SetRotation (float rotation);
     void SetScale (const cml::vector3f & scale);

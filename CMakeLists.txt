@@ -13,6 +13,7 @@ set(header_files
 	include/csaru-game2dlib-cpp.h
 	include/GameObject.hpp
 	include/GameObjectComponent.hpp
+	include/ObjId.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp
 	include/Timer.hpp

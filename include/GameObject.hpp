@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "ObjId.hpp"
 #include "Transform.hpp"
 
 namespace CSaruGame {
@@ -30,10 +31,8 @@ public: // GameObject
     const Transform & GetTransform () const { return m_transform; }
 
     void                  AddComponent (GameObjectComponent * component);
-    GameObjectComponent * GetComponent (unsigned componentTypeId);
-    GameObjectComponent * GetComponent (unsigned short module, unsigned short componentType) {
-        return GetComponent(module << 16 | componentType);
-    }
+    GameObjectComponent * GetComponentExact (ObjId id);
+    GameObjectComponent * GetComponentByType (ObjId globalTypeId);
 
 };
 

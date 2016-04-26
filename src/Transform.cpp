@@ -31,6 +31,13 @@ void Transform::GetWorldFromModelMtx (cml::matrix44f_c * worldMatrixOut) const {
 
 }
 
+//===========================================================================
+void Transform::SetPosition (float x, float y, float z) {
+	m_position[0] = x;
+	m_position[1] = y;
+	m_position[2] = z;
+}
+
 //==============================================================================
 void Transform::SetPosition (const cml::vector3f & position) {
     m_position = position;
