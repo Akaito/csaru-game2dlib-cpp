@@ -121,22 +121,26 @@ void Texture::Render (
 		destRect.h = srcRect->h;
 	}
 
+	SDL_assert_release(m_texture);
 	SDL_RenderCopyEx(renderer, m_texture, srcRect, &destRect, rotDegrees, rotCenter, flip);
 
 }
 
 //===========================================================================
 void Texture::SetAlpha (uint8_t a) {
+	SDL_assert_release(m_texture);
 	SDL_SetTextureAlphaMod(m_texture, a);
 }
 
 //===========================================================================
 void Texture::SetBlendMode (SDL_BlendMode blendMode) {
+	SDL_assert_release(m_texture);
 	SDL_SetTextureBlendMode(m_texture, blendMode);
 }
 
 //===========================================================================
 void Texture::SetColor (uint8_t r, uint8_t g, uint8_t b) {
+	SDL_assert_release(m_texture);
 	SDL_SetTextureColorMod(m_texture, r, g, b);
 }
 
