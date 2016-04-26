@@ -42,3 +42,11 @@ CSaru_Depends("csaru-core-cpp")
 set(CXX_STANDARD_REQUIRED true)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 
+# Disable compiler optimizations.
+if (UNIX)
+	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
+	set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
+endif()
+
+set(CMAKE_BUILD_TYPE "Debug")
+
