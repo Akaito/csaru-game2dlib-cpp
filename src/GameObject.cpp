@@ -8,13 +8,22 @@ GameObject::GameObject ()
 {}
 
 //==============================================================================
+GameObject::~GameObject () {
+	// TODO : Assert instead of silently delete.
+	for (GameObjectComponent * goc : m_components) {
+		delete goc;
+	}
+	m_components.clear();
+}
+
+//==============================================================================
 void GameObject::AddComponent (GameObjectComponent * component) {
     m_components.push_back(component);
     component->SetOwner(this);
 }
 
 //==============================================================================
-GameObjectComponent * GameObject::GetComponentByType (ObjId globalTypeId) {
+GameObjectComponent * GameObject::GetGocByType (ObjId globalTypeId) {
 
     for (GameObjectComponent * goc : m_components) {
         if (goc->GetGlobalTypeId() == globalTypeId)
@@ -26,7 +35,7 @@ GameObjectComponent * GameObject::GetComponentByType (ObjId globalTypeId) {
 }
 
 //==============================================================================
-GameObjectComponent * GameObject::GetComponentExact (ObjId id) {
+GameObjectComponent * GameObject::GetGocExact (ObjId id) {
 
     for (GameObjectComponent * goc : m_components) {
         if (goc->GetId() == id)
