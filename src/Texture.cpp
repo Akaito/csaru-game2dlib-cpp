@@ -115,13 +115,16 @@ void Texture::Render (
 	SDL_RendererFlip  flip
 ) const {
 
+	SDL_assert_release(m_texture);
+	SDL_assert_release(m_width);
+	SDL_assert_release(m_height);
+
 	SDL_Rect destRect = { int(x), int(y), int(m_width), int(m_height) };
 	if (srcRect) {
 		destRect.w = srcRect->w;
 		destRect.h = srcRect->h;
 	}
 
-	SDL_assert_release(m_texture);
 	SDL_RenderCopyEx(renderer, m_texture, srcRect, &destRect, rotDegrees, rotCenter, flip);
 
 }

@@ -18,6 +18,7 @@ private: // Data
 	CSaru2d::Texture m_texture; // TODO : Use handle to texture in some manager
 	SDL_Rect         m_sourceRect;
 	SDL_Renderer *   m_renderer = nullptr;
+	SDL_RendererFlip m_flip     = SDL_FLIP_NONE;
 
 public: // Construction
 	GocSpriteSimple (uint32_t generation) :
@@ -32,6 +33,7 @@ public: // Queries
 
 public: // Commands
 	bool LoadTextureFromFile(SDL_Renderer *, const char * path);
+	void SetFlip (SDL_RendererFlip);
 
 public: // GameObjectComponent interface
 	void Render ();

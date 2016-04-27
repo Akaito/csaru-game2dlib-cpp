@@ -34,7 +34,20 @@ void GocSpriteSimple::Render () {
 		return;
 
 	const cml::vector3f & pos = owner->GetTransform().GetPosition();
-	m_texture.Render(m_renderer, pos[0], pos[1], &m_sourceRect);
+	m_texture.Render(
+		m_renderer,
+		pos[0],
+		pos[1],
+		&m_sourceRect,
+		owner->GetTransform().GetRotation() * 180.0f / M_PI,
+		nullptr /* rotCenter */,
+		m_flip
+	);
+}
+
+//==============================================================================
+void GocSpriteSimple::SetFlip (SDL_RendererFlip flip) {
+	m_flip = flip;
 }
 
 } // namespace CSaruGame
