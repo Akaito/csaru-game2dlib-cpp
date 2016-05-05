@@ -12,7 +12,7 @@ namespace CSaruGame {
 class GocSpriteSimple : public GameObjectComponent {
 public: // ID
 	// 2XXX are 2d graphics gocs; easier debugging by module-local convention
-	static const ObjId s_gocTypeId = CSARU_TYPE_ID(s_Module_Base, 2001);
+	static const ObjId s_gocTypeId = CSARU_TYPE_ID(s_Module_Base, 0x2001);
 
 private: // Data
 	CSaru2d::Texture m_texture; // TODO : Use handle to texture in some manager
@@ -29,7 +29,7 @@ public: // Construction
 
 public: // Queries
 	CSaru2d::Texture * GetTexture () { return &m_texture; }
-	SDL_Rect &         SrcRect ()    { return m_sourceRect; }
+	SDL_Rect &         GetSrcRect () { return m_sourceRect; }
 
 public: // Commands
 	bool LoadTextureFromFile(SDL_Renderer *, const char * path);

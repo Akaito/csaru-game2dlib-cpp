@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.2)
 set(src_files
 	src/GameObject.cpp
 	src/GocSpriteSimple.cpp
+	src/GocSrcRectAnimator.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
 	src/Timer.cpp
@@ -15,6 +16,7 @@ set(header_files
 	include/GameObject.hpp
 	include/GameObjectComponent.hpp
 	include/GocSpriteSimple.hpp
+	include/GocSrcRectAnimator.hpp
 	include/ObjId.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp

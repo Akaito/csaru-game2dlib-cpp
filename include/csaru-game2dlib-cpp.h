@@ -7,4 +7,5 @@
 #include <csaru-game2dlib-cpp/Timer.hpp>
 
 #include <csaru-game2dlib-cpp/GocSpriteSimple.hpp>
+#include <csaru-game2dlib-cpp/GocSrcRectAnimator.hpp>
 
