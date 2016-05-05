@@ -3,6 +3,7 @@
 #include <csaru-core-cpp/csaru-core-cpp.h>
 
 #include "GameObjectComponent.hpp"
+#include "TextureAnimation.hpp"
 
 struct SDL_Rect;
 
@@ -15,17 +16,23 @@ public: // ID
 	static const ObjId s_gocTypeId = CSARU_TYPE_ID(s_Module_Base, 0x9201);
 
 private: // Data
-	SDL_Rect * m_rect;
+	const CSaru2d::TextureAnimation * m_animation  = nullptr;
+	SDL_Rect *                        m_targetRect = nullptr;
+
+	unsigned m_frameIndex  = 0;
+	unsigned m_msThisFrame = 0;
 
 public: // Construction
 	GocSrcRectAnimator (uint32_t generation) :
 		GameObjectComponent(s_Module_Base, s_gocTypeId, generation)
 	{}
 
-	~GocSrcRectAnimator ()            { m_rect = nullptr; }
+	~GocSrcRectAnimator ();
 
 public: // Commands
-	void SetSrcRect (SDL_Rect * rect) { m_rect = rect; }
+	void Clear ();
+	void SetAnimation (const CSaru2d::TextureAnimation * anim);
+	void SetTargetRect (SDL_Rect * rectToAnimate) { m_targetRect = rectToAnimate; }
 
 public: // GameObjectComponent interface
 	void Update (float dt);
