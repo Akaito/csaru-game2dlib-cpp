@@ -18,7 +18,7 @@ public: // Methods
     GameObjectComponent (ObjId id = s_ObjId_Invalid) : m_id(id), m_owner(nullptr)
     {}
 
-    GameObjectComponent (uint16_t module, uint16_t type, uint32_t generation) :
+    GameObjectComponent (ObjId module, ObjId type, uint32_t generation) :
         m_id(CSARU_ID(module, type, generation)),
         m_owner(nullptr)
     {}
@@ -29,10 +29,10 @@ public: // Methods
     virtual void Render ()         {}
 
     ObjId        GetId () const                { return m_id; }
-    uint16_t     GetLocalTypeId () const       { return CSARU_GET_TYPE_ID(m_id); }
-	uint32_t     GetGlobalTypeId () const      { return static_cast<uint32_t>(m_id >> 32); }
-    uint16_t     GetModuleId () const          { return CSARU_GET_MODULE_ID(m_id); }
-    uint32_t     GetGeneration () const        { return CSARU_GET_GENERATION(m_id); }
+    ObjId        GetLocalTypeId () const       { return m_id & CSARU_TYPE_MASK; }
+	ObjId        GetGlobalTypeId () const      { return m_id & (CSARU_MODULE_MASK | CSARU_TYPE_MASK); }
+    ObjId        GetModuleId () const          { return m_id & CSARU_MODULE_MASK; }
+    ObjId        GetGeneration () const        { return m_id & CSARU_GENERATION_MASK; }
     GameObject * GetOwner ()                   { return m_owner; }
     void         SetOwner (GameObject * owner) { m_owner = owner; }
 };
