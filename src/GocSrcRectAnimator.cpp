@@ -31,8 +31,11 @@ void GocSrcRectAnimator::SetAnimation (const CSaru2d::TextureAnimation * anim) {
 
 	if (m_animation) {
 		const unsigned frameCount = m_animation->GetFrameCount();
-		if (frameCount)
+		if (frameCount) {
 			m_frameIndex %= m_animation->GetFrameCount();
+			if (m_targetRect)
+				*m_targetRect = m_animation->GetSrcRect(m_frameIndex);
+		}
 	}
 
 }
@@ -55,6 +58,7 @@ void GocSrcRectAnimator::Update (float dt) {
 
 	m_frameIndex  = (m_frameIndex + 1) % frameCount;
 	*m_targetRect = m_animation->GetSrcRect(m_frameIndex);
+	m_msThisFrame = 0;
 
 }
 
