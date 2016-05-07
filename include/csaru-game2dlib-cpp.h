@@ -6,6 +6,7 @@
 #include <csaru-game2dlib-cpp/TextureAnimation.hpp>
 #include <csaru-game2dlib-cpp/Timer.hpp>
 
+#include <csaru-game2dlib-cpp/GocGobjRotator.hpp>
 #include <csaru-game2dlib-cpp/GocSpriteSimple.hpp>
 #include <csaru-game2dlib-cpp/GocSrcRectAnimator.hpp>
 
