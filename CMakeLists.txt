@@ -43,6 +43,19 @@ CSaru_UseVendor("CML")
 
 CSaru_Depends("csaru-core-cpp")
 
+# Note! On Windows, be sure you've set env vars SDL2, SDL2_IMAGE, and SDL2_TTF.
+# They should be a path that has sub-dirs like "include" and "lib".
+set(SDL_BUILDING_LIBRARY True)  # This doesn't seem to be needed?
+include(FindSDL2)
+include_directories("${SDL2_INCLUDE_DIR}")
+link_libraries("${SDL2_LIBRARY}")
+include(FindSDL2_image)
+include_directories("${SDL2_IMAGE_INCLUDE_DIR}")
+link_libraries("${SDL2_IMAGE_LIBRARY}")
+include(FindSDL2_ttf)
+include_directories("${SDL2_TTF_INCLUDE_DIR}")
+link_libraries("${SDL2_TTF_LIBRARY}")
+
 set(CXX_STANDARD_REQUIRED true)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 

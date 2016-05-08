@@ -3,6 +3,11 @@
 Session.vim
 __pycache__
 
+# This should take care of build all files.
+# But an accidental in-source build still gives value to
+# ignoring some other file types.
+build/*
+
 Debug
 Release
 *vcxproj*.user
