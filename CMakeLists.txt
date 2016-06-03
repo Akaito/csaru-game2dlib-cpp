@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.2)
 #	manually means the build system knows when something changes.
 set(src_files
 	src/GameObject.cpp
+	#src/GameObjectDatabase.cpp
 	src/GocGobjRotator.cpp
 	src/GocSpriteSimple.cpp
 	src/GocSrcRectAnimator.cpp
@@ -16,6 +17,7 @@ set(header_files
 	include/csaru-game2dlib-cpp.h
 	include/GameObject.hpp
 	include/GameObjectComponent.hpp
+	#include/GameObjectDatabase.hpp
 	include/GocGobjRotator.hpp
 	include/GocSpriteSimple.hpp
 	include/GocSrcRectAnimator.hpp
