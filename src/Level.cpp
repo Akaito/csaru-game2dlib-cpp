@@ -106,10 +106,10 @@ void Level::LoadLevelStuffComponent (CSaruContainer::DataMapReaderSimple simpleR
 
 	// module
 	const std::string fullType = simpleReader.String("type");
-	SDL_assert_release(std::strstr(fullType.c_str(), "CSaruBase/") != nullptr);
+	SDL_assert_release(std::strstr(fullType.c_str(), "CSaruBase_") != nullptr);
 
 	// type
-	const char * type = std::strchr(fullType.c_str(), '/');
+	const char * type = std::strchr(fullType.c_str(), '_');
 	SDL_assert_release(type);
 	++type;
 
