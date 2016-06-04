@@ -123,11 +123,28 @@ Sint64 SDLCALL seek (SDL_RWops * context, Sint64 offset, int whence) {
 
 //==============================================================================
 Sint64 SDLCALL size (SDL_RWops * context) {
+
+	PHYSFS_File * file = context->hidden->unknown->data1;
+
+	PHYSFS_sint64 length = PHYSFS_fileLength(file);
+	SDL_assert_paranoid(length != -1);
+	if (endPos == -1) {
+		SDL_SetError(
+			"RWops PhysicsFS size error getting file length; streaming archive?: %s",
+			PHYSFS_getLastError()
+		);
+		return -1;
+	}
+
+	return length;
+
 }
 
 //==============================================================================
+/*
 Sint64 SDLCALL tell (SDL_RWops * context) {
 }
+*/
 
 //==============================================================================
 std::size_t SDLCALL write (
@@ -136,6 +153,30 @@ std::size_t SDLCALL write (
 	std::size_t  size,
 	std::size_t  num
 ) {
+
+	PHYSFS_File * file = context->hidden->unknown->data1;
+
+	// TODO : Should we return 0 from here if already at EOF?
+	// http://hg.libsdl.org/SDL/file/default/include/SDL_rwops.h
+	// https://wiki.libsdl.org/SDL_RWops
+
+	PHYSFS_sint64 writeResult = PHYSFS_write(
+		file /* file to write to */,
+		ptr  /* buffer to write from */,
+		size /* size of each object */,
+		num  /* number of objects */
+	);
+	SDL_assert_paranoid(writeResult != -1);
+	if (writeResult == -1) {
+		SDL_SetError("RWops write error from PhysicsFS: %s", PHYSFS_getLastError());
+		return 0;
+	}
+
+	// return number of objects written.  SDL header casually indicates this
+	// should be 0 if less than num param.  Possibly a mistake; docs say count
+	// written should be returned, which is more useful.
+	return writeResult;
+
 }
 
 } // anonymous namespace
@@ -168,7 +209,7 @@ SDL_RWops * AllocRWopsPhysFs (const char * path, const char mode) {
 	rwOps->read  = read;
 	rwOps->seek  = seek;
 	rwOps->size  = size;
-	rwOps->tell  = tell;
+	rwOps->tell  = nullptr; // tell; // TODO : Is this still in SDL?
 	rwOps->write = write;
 	rwOps->type  = SDL_RWOPS_UNKNOWN; // application-defined RWops type
 	rwOps->hidden->unknown->data1 = physFsFile;
