@@ -8,6 +8,7 @@ set(src_files
 	src/GocGobjRotator.cpp
 	src/GocSpriteSimple.cpp
 	src/GocSrcRectAnimator.cpp
+	src/Level.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
 	src/Timer.cpp
@@ -21,6 +22,7 @@ set(header_files
 	include/GocGobjRotator.hpp
 	include/GocSpriteSimple.hpp
 	include/GocSrcRectAnimator.hpp
+	include/Level.hpp
 	include/ObjId.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp
