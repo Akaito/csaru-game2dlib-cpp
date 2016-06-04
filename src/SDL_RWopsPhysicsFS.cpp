@@ -32,6 +32,32 @@ std::size_t SDLCALL read (
 	std::size_t size,
 	std::size_t maxnum
 ) {
+
+	PHYSFS_File * file = context->hidden->unknown->data1;
+
+	// Return 0 if at EOF.
+	if (PHYSFS_eof(file))
+		return 0;
+
+	PHYSFS_sint64 readResult = PHYSFS_read(
+		file,
+		ptr    /* buffer */,
+		size   /* object size */,
+		maxnum /* object count */
+	);
+
+	// PHYSFS_read returns -1 on complete failure.
+	SDL_assert_paranoid(readResult != -1);
+	if (readResult == -1) {
+		SDL_SetError(
+			"RWops read complete failure from PhysFS: %s",
+			PHYSFS_getLastError()
+		);
+		return 0;
+	}
+
+	return static_cast<std::size_t>(readResult);
+
 }
 
 //==============================================================================
