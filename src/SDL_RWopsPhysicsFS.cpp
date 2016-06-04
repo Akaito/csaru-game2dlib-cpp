@@ -62,6 +62,63 @@ std::size_t SDLCALL read (
 
 //==============================================================================
 Sint64 SDLCALL seek (SDL_RWops * context, Sint64 offset, int whence) {
+
+	SDL_assert(whence == RW_SEEK_SET || whence == RW_SEEK_CUR || whence == RW_SEEK_END);
+
+	PHYSFS_File * file = context->hidden->unknown->data1;
+
+	PHYSFS_uint64 targetPos = static_cast<PHYSFS_uint64>(-1);
+	switch (whence) {
+		case RW_SEEK_SET:
+			targetPos = static_cast<PHYSFS_uint64>(offset);
+			break;
+
+		case RW_SEEK_CUR: {
+			PHYSFS_sint64 curFilePos = PHYSFS_tell(file);
+			SDL_assert_paranoid(curFilePos != -1);
+			if (curFilePos == -1) {
+				SDL_SetError(
+					"RWops PhysicsFS seek-cur error getting pos: %s",
+					PHYSFS_getLastError()
+				);
+				return -1;
+			}
+			targetPos = static_cast<PHYSFS_uint64>(curFilePos + offset);
+		} break;
+
+		case RW_SEEK_END: {
+			PHYSFS_sint64 endPos = PHYSFS_fileLength(file);
+			SDL_assert_paranoid(endPos != -1);
+			if (endPos == -1) {
+				SDL_SetError(
+					"RWops PhysicsFS seek-end error getting file length; streaming archive?: %s",
+					PHYSFS_getLastError()
+				);
+				return -1;
+			}
+			targetPos = static_cast<PHYSFS_uint64>(endPos + offset);
+		} break;
+
+		default:
+			SDL_SetError(
+				"Invalid SDL_RWops seek whence {%d}.  (PhysicsFS RWops).  "
+					"Use RW_SEEK_SET, RW_SEEK_CUR, or RW_SEEK_END (if you're feeling brave).  "
+					"These come from #include <cstdio>.",
+				whence
+			);
+			return -1;
+			break;
+	}
+
+	int seekResult = PHYSFS_seek(file, targetPos);
+	SDL_assert_paranoid(seekResult);
+	if (!seekResult) {
+		SDL_SetError("SDL_RWops for PhysicsFS error seeking: %s", PHYSFS_getLastError());
+		return -1;
+	}
+
+	return static_cast<Sint64>(targetPos); // note uint64 -> int64
+
 }
 
 //==============================================================================
