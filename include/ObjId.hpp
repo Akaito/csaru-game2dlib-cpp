@@ -10,6 +10,11 @@ typedef uint64_t ObjId;
 #define CSARU_TYPE_MASK       static_cast<ObjId>(0x0000FFFF00000000)
 #define CSARU_GENERATION_MASK static_cast<ObjId>(0x00000000FFFFFFFF)
 
+// TODO : ObjectDb[Table] gains internal array of T_Id as encountered;
+//        treat ObjId generation as index into that table?
+//        Enables use of uint64_t as transient, untyped, intra-program
+//        ID to any object in a pool.
+
 
 #define CSARU_MODULE_ID(moduleId) \
 	((static_cast<ObjId>(moduleId) << 48) & CSARU_MODULE_MASK)
