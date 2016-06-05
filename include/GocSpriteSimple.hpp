@@ -32,7 +32,7 @@ public: // Queries
 	SDL_Rect &         GetSrcRect () { return m_sourceRect; }
 
 public: // Commands
-	bool LoadTextureFromFile(SDL_Renderer *, const char * path);
+	bool LoadTexture(SDL_Renderer *, SDL_RWops *);
 	void SetFlip (SDL_RendererFlip);
 
 public: // GameObjectComponent interface

@@ -12,11 +12,11 @@ GocSpriteSimple::~GocSpriteSimple () {
 }
 
 //==============================================================================
-bool GocSpriteSimple::LoadTextureFromFile (SDL_Renderer * renderer, const char * path) {
+bool GocSpriteSimple::LoadTexture (SDL_Renderer * renderer, SDL_RWops * rwOps) {
 	m_renderer = renderer;
 
 	// note: can add color-keying, etc. args here
-	if (!m_texture.LoadFromFile(m_renderer, path)) {
+	if (!m_texture.Load(m_renderer, rwOps)) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "GocSpriteSimple failed to load given texture.");
 		return false;
 	}
