@@ -9,6 +9,7 @@ set(src_files
 	src/GocSpriteSimple.cpp
 	src/GocSrcRectAnimator.cpp
 	src/Level.cpp
+	src/SDL_RWopsPhysicsFS.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
 	src/Timer.cpp
@@ -24,6 +25,7 @@ set(header_files
 	include/GocSrcRectAnimator.hpp
 	include/Level.hpp
 	include/ObjId.hpp
+	include/SDL_RWopsPhysicsFS.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp
 	include/Timer.hpp

@@ -20,7 +20,7 @@ namespace CSaruGame {
 // mode: Any one of 'r', 'w', 'a' (read, write, append).
 //
 // returns nullptr on error (check SDL_GetError()).
-SDL_RWops * AllocRWopsPhysFs (const char * path, const char mode);
+SDL_RWops * AllocRwOpsPhysFs (const char * path, const char mode);
 
 } // namespace CSaruGame
 

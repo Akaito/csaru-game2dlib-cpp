@@ -11,3 +11,5 @@
 #include <csaru-game2dlib-cpp/GocSpriteSimple.hpp>
 #include <csaru-game2dlib-cpp/GocSrcRectAnimator.hpp>
 
+#include <csaru-game2dlib-cpp/SDL_RWopsPhysicsFS.hpp>
+

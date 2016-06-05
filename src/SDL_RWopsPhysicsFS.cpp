@@ -1,4 +1,6 @@
-#include "../include/RWopsPhysicsFS.hpp"
+#include "../include/SDL_RWopsPhysicsFS.hpp"
+
+#include <cstddef> // size_t
 
 #include <physfs.h>
 
@@ -8,7 +10,7 @@ namespace {
 //==============================================================================
 int SDLCALL close (SDL_RWops * context) {
 
-	PHYSFS_File * file = context->hidden->unknown->data1;
+	PHYSFS_File * file = reinterpret_cast<PHYSFS_File *>(context->hidden.unknown.data1);
 
 	const int physFsCloseResult = PHYSFS_close(file);
 	SDL_assert_paranoid(physFsCloseResult);
@@ -33,7 +35,7 @@ std::size_t SDLCALL read (
 	std::size_t maxnum
 ) {
 
-	PHYSFS_File * file = context->hidden->unknown->data1;
+	PHYSFS_File * file = reinterpret_cast<PHYSFS_File *>(context->hidden.unknown.data1);
 
 	// Return 0 if at EOF.
 	if (PHYSFS_eof(file))
@@ -65,7 +67,7 @@ Sint64 SDLCALL seek (SDL_RWops * context, Sint64 offset, int whence) {
 
 	SDL_assert(whence == RW_SEEK_SET || whence == RW_SEEK_CUR || whence == RW_SEEK_END);
 
-	PHYSFS_File * file = context->hidden->unknown->data1;
+	PHYSFS_File * file = reinterpret_cast<PHYSFS_File *>(context->hidden.unknown.data1);
 
 	PHYSFS_uint64 targetPos = static_cast<PHYSFS_uint64>(-1);
 	switch (whence) {
@@ -124,11 +126,11 @@ Sint64 SDLCALL seek (SDL_RWops * context, Sint64 offset, int whence) {
 //==============================================================================
 Sint64 SDLCALL size (SDL_RWops * context) {
 
-	PHYSFS_File * file = context->hidden->unknown->data1;
+	PHYSFS_File * file = reinterpret_cast<PHYSFS_File *>(context->hidden.unknown.data1);
 
 	PHYSFS_sint64 length = PHYSFS_fileLength(file);
 	SDL_assert_paranoid(length != -1);
-	if (endPos == -1) {
+	if (length == -1) {
 		SDL_SetError(
 			"RWops PhysicsFS size error getting file length; streaming archive?: %s",
 			PHYSFS_getLastError()
@@ -141,12 +143,6 @@ Sint64 SDLCALL size (SDL_RWops * context) {
 }
 
 //==============================================================================
-/*
-Sint64 SDLCALL tell (SDL_RWops * context) {
-}
-*/
-
-//==============================================================================
 std::size_t SDLCALL write (
 	SDL_RWops *  context,
 	const void * ptr,
@@ -154,7 +150,7 @@ std::size_t SDLCALL write (
 	std::size_t  num
 ) {
 
-	PHYSFS_File * file = context->hidden->unknown->data1;
+	PHYSFS_File * file = reinterpret_cast<PHYSFS_File *>(context->hidden.unknown.data1);
 
 	// TODO : Should we return 0 from here if already at EOF?
 	// http://hg.libsdl.org/SDL/file/default/include/SDL_rwops.h
@@ -185,7 +181,7 @@ std::size_t SDLCALL write (
 namespace CSaruGame {
 
 //==============================================================================
-SDL_RWops * AllocRWopsPhysFs (const char * path, const char mode) {
+SDL_RWops * AllocRwOpsPhysFs (const char * path, const char mode) {
 
 	SDL_assert(mode == 'a' || mode == 'r' || mode == 'w');
 
@@ -205,15 +201,14 @@ SDL_RWops * AllocRWopsPhysFs (const char * path, const char mode) {
 	}
 
 	SDL_RWops * rwOps = SDL_AllocRW();
-	rwOps->close = close;
-	rwOps->read  = read;
-	rwOps->seek  = seek;
-	rwOps->size  = size;
-	rwOps->tell  = nullptr; // tell; // TODO : Is this still in SDL?
-	rwOps->write = write;
-	rwOps->type  = SDL_RWOPS_UNKNOWN; // application-defined RWops type
-	rwOps->hidden->unknown->data1 = physFsFile;
-	rwOps->hidden->unknown->data2 = mode;
+	rwOps->close                = close;
+	rwOps->read                 = read;
+	rwOps->seek                 = seek;
+	rwOps->size                 = size;
+	rwOps->write                = write;
+	rwOps->type                 = SDL_RWOPS_UNKNOWN; // application-defined RWops type
+	rwOps->hidden.unknown.data1 = physFsFile;
+	rwOps->hidden.unknown.data2 = nullptr;
 
 	// Must be SDL_RWclose()'d to be freed by SDL_FreeRW()!
 	return rwOps;
