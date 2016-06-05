@@ -49,6 +49,14 @@ public:
 		const char *   textureText,
 		SDL_Color      textColor
 	);
+	bool Load (
+		SDL_Renderer * renderer,
+		SDL_RWops *    rwOps,
+		bool           colorKeying = false,
+		uint8_t        r           = 0xFF,
+		uint8_t        g           = 0x00,
+		uint8_t        b           = 0xFF
+	);
 
 	void Free ();
 

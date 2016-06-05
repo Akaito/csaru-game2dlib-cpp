@@ -29,6 +29,52 @@ void Texture::Free () {
 }
 
 //===========================================================================
+bool Texture::Load (
+	SDL_Renderer * renderer,
+	SDL_RWops *    rwOps,
+	bool           colorKeying,
+	uint8_t        r,
+	uint8_t        g,
+	uint8_t        b
+) {
+
+	SDL_assert(renderer);
+	SDL_assert(rwOps);
+
+	Free();
+
+	SDL_Surface * tempSurface = IMG_Load_RW(rwOps, 1 /* free rwOps for me */);
+	if (!tempSurface) {
+		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL_image failed to load_rw.  %s\n", IMG_GetError());
+		return false;
+	}
+
+	// Have to set the color key (transparent color) on the surface before creating a texture from it.
+	if (colorKeying) {
+		SDL_SetColorKey(
+			tempSurface,
+			SDL_TRUE /* enable/disable color key */,
+			SDL_MapRGB(tempSurface->format, r, g, b)
+		);
+	}
+
+	m_texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+	if (!m_texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL failed to create a texture from surface.  %s\n", SDL_GetError());
+		SDL_FreeSurface(tempSurface);
+		return false;
+	}
+
+	m_width  = tempSurface->w;
+	m_height = tempSurface->h;
+
+	SDL_FreeSurface(tempSurface);
+
+	return m_texture != nullptr;
+
+}
+
+//===========================================================================
 bool Texture::LoadFromFile (
 	SDL_Renderer * renderer,
 	const char * path,
