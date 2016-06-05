@@ -75,49 +75,6 @@ bool Texture::Load (
 }
 
 //===========================================================================
-bool Texture::LoadFromFile (
-	SDL_Renderer * renderer,
-	const char * path,
-	bool colorKeying,
-	uint8_t r,
-	uint8_t g,
-	uint8_t b
-) {
-
-	Free();
-
-	SDL_Surface * tempSurface = IMG_Load(path);
-	if (!tempSurface) {
-		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL_image failed to load {%s}.  %s\n", path, IMG_GetError());
-		return false;
-	}
-
-	// Have to set the color key (transparent color) on the surface before creating a texture from it.
-	if (colorKeying) {
-		SDL_SetColorKey(
-			tempSurface,
-			SDL_TRUE /* enable/disable color key */,
-			SDL_MapRGB(tempSurface->format, r, g, b)
-		);
-	}
-
-	m_texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-	if (!m_texture) {
-		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL failed to create a texture from surface for {%s}.  %s\n", path, SDL_GetError());
-		SDL_FreeSurface(tempSurface);
-		return false;
-	}
-
-	m_width  = tempSurface->w;
-	m_height = tempSurface->h;
-
-	SDL_FreeSurface(tempSurface);
-
-	return m_texture != nullptr;
-
-}
-
-//===========================================================================
 bool Texture::LoadFromRenderedText (
 	SDL_Renderer * renderer,
 	TTF_Font *     sdlFont,

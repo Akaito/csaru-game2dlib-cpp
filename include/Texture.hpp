@@ -35,14 +35,6 @@ public:
 	inline unsigned GetHeight () const { return m_height; }
 
 	// Methods
-	bool LoadFromFile (
-		SDL_Renderer * renderer,
-		const char *   filepath,
-		bool           colorKeying = false,
-		uint8_t        r           = 0xFF,
-		uint8_t        g           = 0x00,
-		uint8_t        b           = 0xFF
-	);
 	bool LoadFromRenderedText (
 		SDL_Renderer * renderer,
 		TTF_Font *     sdlFont,
