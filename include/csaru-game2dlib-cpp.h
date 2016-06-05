@@ -3,7 +3,7 @@
 #include <csaru-game2dlib-cpp/Level.hpp>
 #include <csaru-game2dlib-cpp/GameObject.hpp>
 #include <csaru-game2dlib-cpp/GameObjectComponent.hpp>
-#include <csaru-game2dlib-cpp/ObjectDatabaseTable.hpp>
+#include <csaru-game2dlib-cpp/ObjectDbTable.hpp>
 #include <csaru-game2dlib-cpp/Texture.hpp>
 #include <csaru-game2dlib-cpp/TextureAnimation.hpp>
 #include <csaru-game2dlib-cpp/Timer.hpp>

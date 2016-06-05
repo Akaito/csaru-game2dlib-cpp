@@ -16,13 +16,18 @@ private: // Data
 	float m_radiansPerSecond = 0.0f;
 
 public: // Construction
-	GocGobjRotator (uint32_t generation) :
+	GocGobjRotator (uint32_t generation = 0) :
 		GameObjectComponent(s_Module_Base, s_gocTypeId, generation)
 	{}
 
 	~GocGobjRotator ();
 
 public: // Commands
+	void SetGeneration (uint32_t generation) {
+		m_id =
+			(m_id & (CSARU_MODULE_MASK | CSARU_TYPE_MASK)) |
+			(generation & CSARU_GENERATION_MASK);
+	}
 	void SetRadiansPerSecond (float radians) { m_radiansPerSecond = radians; }
 
 public: // GameObjectComponent interface

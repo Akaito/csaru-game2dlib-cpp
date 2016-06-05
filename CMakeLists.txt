@@ -8,7 +8,7 @@ set(src_files
 	src/GocSpriteSimple.cpp
 	src/GocSrcRectAnimator.cpp
 	src/Level.cpp
-	src/ObjectDatabaseTable.cpp
+	src/ObjectDbTable.cpp
 	src/SDL_RWopsPhysicsFS.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
@@ -24,7 +24,7 @@ set(header_files
 	include/GocSrcRectAnimator.hpp
 	include/Level.hpp
 	include/ObjId.hpp
-	include/ObjectDatabaseTable.hpp
+	include/ObjectDbTable.hpp
 	include/SDL_RWopsPhysicsFS.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp

@@ -9,16 +9,9 @@
 #	include <SDL2/SDL.h>
 #endif
 
-#include <csaru-uuid-cpp/csaru-uuid-cpp.h>
 #include <csaru-container-cpp/csaru-container-cpp.h>
 
-#include "ObjId.hpp"
-
-// TODO : include SDL for SDL_assert_release
-
 namespace CSaruGame {
-
-using CSaruUuid::Uuid;
 
 enum class FindStyle {
 	FAIL = 0,
@@ -33,76 +26,74 @@ struct IGameObjectDatabase {
 //*/
 
 
-template <typename T_Type>
-class ObjectDatabaseTable { //: public IGameObjectDatabase {
+template <typename T_Id, typename T_Object>
+class ObjectDbTable { //: public IGameObjectDatabase {
 public: // Types and constants
-	typedef std::map<Uuid, T_Type *> ObjectLookupTable;
-	// TODO : Pointer-generation pair style handle-supporting array.
+	typedef CSaruContainer::ObjectPool<T_Object> ObjectPool;
+	typedef typename ObjectPool::Handle          Handle;
+	typedef std::map<T_Id, Handle>               LookupTable;
 
 protected: // Data
-	ObjectLookupTable m_lookupTable;
-	ObjId             m_nextTransientId;
+	ObjectPool  m_objectPool;
+	LookupTable m_lookupTable;
 
 public: // Construction
-	ObjectDatabaseTable () :
-		m_nextTransientId(T_Type::s_gocTypeId + 1)
+	ObjectDbTable ()
 	{}
 
 
-	ObjectDatabaseTable (ObjId moduleTypeId) :
-		m_nextTransientId(moduleTypeId + 1)
-	{}
-
-
-	~ObjectDatabaseTable () {
+	~ObjectDbTable () {
 		Clear();
 	}
 
 public: // Queries
-	T_Type * Find (FindStyle findStyle, const Uuid & id) {
+	Handle Find (FindStyle findStyle, const T_Id & id) {
 		auto iter = m_lookupTable.find(id);
 		if (iter != m_lookupTable.end())
 			return iter->second;
 
-		T_Type * result = nullptr;
 		switch (findStyle) {
 			case FindStyle::CREATE_NOW: {
 				return CreateNow(id);
 			}
 
 			case FindStyle::FAIL: {
-				SDL_assert_release(iter != m_lookupTable.end());
-				return nullptr;
+				SDL_assert(iter != m_lookupTable.end());
+				return Handle();
 			}
 		}
-		return result;
+		return Handle();
 	}
 
 public: // Commands
-	void Init () {}
+	void Init () {
+		m_objectPool.Prepare();
+	}
 
 
 	void Clear () {
-		// TODO : LEEAAAKKS!!
+		m_objectPool.DestroyAll();
 		m_lookupTable.clear();
 	}
 
 
-	T_Type * CreateNow (Uuid id) {
+	Handle CreateNow (T_Id id) {
 		auto findResult = m_lookupTable.find(id);
 		SDL_assert(findResult == m_lookupTable.end());
 		if (findResult != m_lookupTable.end()) {
 			SDL_SetError(
-				"ObjectDatabaseTable::Create: Object already exists at {%lu,%lu}.",
+				"ObjectDbTable::Create: Object already exists at {%lu,%lu}.",
 				id.high,
 				id.low
 			);
-			return nullptr;
+			return Handle();
 		}
 
-		T_Type * created = new T_Type(m_nextTransientId++);
-		m_lookupTable[id] = created;
-		return created;
+		Handle handle;
+		T_Object * obj = m_objectPool.Alloc(&handle);
+		SDL_assert(obj);
+		m_lookupTable[id] = handle;
+		return handle;
 	}
 };
 

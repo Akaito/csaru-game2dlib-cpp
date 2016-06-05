@@ -21,7 +21,7 @@ private: // Data
 	SDL_RendererFlip m_flip     = SDL_FLIP_NONE;
 
 public: // Construction
-	GocSpriteSimple (uint32_t generation) :
+	GocSpriteSimple (uint32_t generation = 0) :
 		GameObjectComponent(s_Module_Base, s_gocTypeId, generation)
 	{}
 
@@ -32,6 +32,11 @@ public: // Queries
 	SDL_Rect &         GetSrcRect () { return m_sourceRect; }
 
 public: // Commands
+	void SetGeneration (uint32_t generation) {
+		m_id =
+			(m_id & (CSARU_MODULE_MASK | CSARU_TYPE_MASK)) |
+			(generation & CSARU_GENERATION_MASK);
+	}
 	bool LoadTexture(SDL_Renderer *, SDL_RWops *);
 	void SetFlip (SDL_RendererFlip);
 
