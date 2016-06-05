@@ -4,11 +4,11 @@ cmake_minimum_required(VERSION 3.2)
 #	manually means the build system knows when something changes.
 set(src_files
 	src/GameObject.cpp
-	#src/GameObjectDatabase.cpp
 	src/GocGobjRotator.cpp
 	src/GocSpriteSimple.cpp
 	src/GocSrcRectAnimator.cpp
 	src/Level.cpp
+	src/ObjectDatabaseTable.cpp
 	src/SDL_RWopsPhysicsFS.cpp
 	src/Texture.cpp
 	src/TextureAnimation.cpp
@@ -19,12 +19,12 @@ set(header_files
 	include/csaru-game2dlib-cpp.h
 	include/GameObject.hpp
 	include/GameObjectComponent.hpp
-	#include/GameObjectDatabase.hpp
 	include/GocGobjRotator.hpp
 	include/GocSpriteSimple.hpp
 	include/GocSrcRectAnimator.hpp
 	include/Level.hpp
 	include/ObjId.hpp
+	include/ObjectDatabaseTable.hpp
 	include/SDL_RWopsPhysicsFS.hpp
 	include/Texture.hpp
 	include/TextureAnimation.hpp
@@ -47,6 +47,7 @@ CSaru_Lib(0.1 "${src_files}" "${header_files}")
 # Add <CSaruDir>/pkg/vendor/CML/ to compiler's paths for include-searching
 CSaru_UseVendor("CML")
 
+CSaru_Depends("csaru-uuid-cpp")
 CSaru_Depends("csaru-core-cpp")
 
 if (WIN32)
