@@ -3,7 +3,7 @@
 #include <map>
 
 #include <csaru-core-cpp/csaru-core-cpp.h>
-#include <csaru-container-cpp/csaru-container-cpp.h>
+#include <csaru-datamap-cpp/csaru-datamap-cpp.h>
 
 #include "ObjId.hpp"
 #include "GameObject.hpp"
@@ -15,15 +15,15 @@ private: // data
 	std::map<ObjId, GameObject *> m_gameObjects;
 
 private: // helpers
-	void LoadLevelStuffGameObject (CSaruContainer::DataMapReaderSimple);
-	void LoadLevelStuffComponent (CSaruContainer::DataMapReaderSimple);
+	void LoadLevelStuffGameObject (CSaruDataMap::DataMapReaderSimple);
+	void LoadLevelStuffComponent (CSaruDataMap::DataMapReaderSimple);
 
 public: // construction
 	Level ();
 	~Level ();
 
 public: // commands
-	bool AcceptDataMap (CSaruContainer::DataMapReader);
+	bool AcceptDataMap (CSaruDataMap::DataMapReader);
 	void Destroy ();
 
 public: // queries

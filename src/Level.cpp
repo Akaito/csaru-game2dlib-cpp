@@ -28,13 +28,13 @@ Level::~Level () {
 }
 
 //==============================================================================
-bool Level::AcceptDataMap (CSaruContainer::DataMapReader dmrRoot) {
+bool Level::AcceptDataMap (CSaruDataMap::DataMapReader dmrRoot) {
 
 	// root -> data
 	dmrRoot.ToFirstChild();
 	SDL_assert_release(!std::strcmp(dmrRoot.ReadName(), "data"));
 	if (!std::strcmp(dmrRoot.ReadName(), "data")) {
-		CSaruContainer::DataMapReaderSimple simpleReader(dmrRoot);
+		CSaruDataMap::DataMapReaderSimple simpleReader(dmrRoot);
 		// data -> array of data objects or first data object
 		simpleReader.ToFirstChild();
 
@@ -70,7 +70,7 @@ GameObject * Level::GetGameObject (ObjId id) {
 }
 
 //==============================================================================
-void Level::LoadLevelStuffGameObject (CSaruContainer::DataMapReaderSimple simpleReader) {
+void Level::LoadLevelStuffGameObject (CSaruDataMap::DataMapReaderSimple simpleReader) {
 	int id = simpleReader.Int("id");
 	//SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "id: %d", id);
 
@@ -79,7 +79,7 @@ void Level::LoadLevelStuffGameObject (CSaruContainer::DataMapReaderSimple simple
 	simpleReader.ToChild("attributes");
 	if (simpleReader.ToChild("transform")) {
 		if (simpleReader.EnterArray("position")) {
-			CSaruContainer::DataMapReader posReader = simpleReader.GetReader();
+			CSaruDataMap::DataMapReader posReader = simpleReader.GetReader();
 			int x = posReader.ReadIntWalk();
 			int y = posReader.ReadIntWalk();
 			int z = posReader.ReadIntWalk();
@@ -100,7 +100,7 @@ void Level::LoadLevelStuffGameObject (CSaruContainer::DataMapReaderSimple simple
 }
 
 //==============================================================================
-void Level::LoadLevelStuffComponent (CSaruContainer::DataMapReaderSimple simpleReader) {
+void Level::LoadLevelStuffComponent (CSaruDataMap::DataMapReaderSimple simpleReader) {
 
 	//SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "type: %s", simpleReader.String("type").c_str());
 
@@ -164,7 +164,7 @@ void Level::LoadLevelStuffComponent (CSaruContainer::DataMapReaderSimple simpleR
 			// src_rect
 			{
 				if (simpleReader.EnterArray("src_rect")) {
-					CSaruContainer::DataMapReader posReader = simpleReader.GetReader();
+					CSaruDataMap::DataMapReader posReader = simpleReader.GetReader();
 					int x = posReader.ReadIntWalk();
 					int y = posReader.ReadIntWalk();
 					int w = posReader.ReadIntWalk();
@@ -194,7 +194,7 @@ void Level::LoadLevelStuffComponent (CSaruContainer::DataMapReaderSimple simpleR
 			// (to be moved to post-create load section)
 			{
 				if (simpleReader.EnterArray("color")) {
-					CSaruContainer::DataMapReader posReader = simpleReader.GetReader();
+					CSaruDataMap::DataMapReader posReader = simpleReader.GetReader();
 					int r = posReader.ReadIntWalk();
 					int g = posReader.ReadIntWalk();
 					int b = posReader.ReadIntWalk();

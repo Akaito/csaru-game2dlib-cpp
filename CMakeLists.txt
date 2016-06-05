@@ -47,6 +47,7 @@ CSaru_Lib(0.1 "${src_files}" "${header_files}")
 # Add <CSaruDir>/pkg/vendor/CML/ to compiler's paths for include-searching
 CSaru_UseVendor("CML")
 
+CSaru_Depends("csaru-datamap-cpp")
 CSaru_Depends("csaru-uuid-cpp")
 CSaru_Depends("csaru-core-cpp")
 
