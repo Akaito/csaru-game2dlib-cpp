@@ -20,6 +20,8 @@ namespace CSaruGame {
 
 //==============================================================================
 Level::Level () {
+	const bool gameObjectPoolPrepared = m_gobPool.Prepare();
+	SDL_assert_release(gameObjectPoolPrepared);
 }
 
 //==============================================================================
@@ -54,10 +56,8 @@ bool Level::AcceptDataMap (CSaruDataMap::DataMapReader dmrRoot) {
 
 //==============================================================================
 void Level::Destroy () {
-	for (auto pair : m_gameObjects) {
-		delete pair.second;
-	}
 	m_gameObjects.clear();
+	m_gobPool.DestroyAll();
 }
 
 //==============================================================================
@@ -74,7 +74,10 @@ void Level::LoadLevelStuffGameObject (CSaruDataMap::DataMapReaderSimple simpleRe
 	int id = simpleReader.Int("id");
 	//SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "id: %d", id);
 
-	GameObject * gobj = new GameObject;
+	uint32_t index = m_gobPool.Alloc();
+	SDL_assert_release(index != uint32_t(-1));
+	GameObject * gobj  = m_gobPool.Get(index);
+	SDL_assert_release(gobj);
 
 	simpleReader.ToChild("attributes");
 	if (simpleReader.ToChild("transform")) {
