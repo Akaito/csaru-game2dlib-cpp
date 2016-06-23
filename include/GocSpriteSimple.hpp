@@ -32,11 +32,6 @@ public: // Queries
 	SDL_Rect &         GetSrcRect () { return m_sourceRect; }
 
 public: // Commands
-	void SetGeneration (uint32_t generation) {
-		m_id =
-			(m_id & (CSARU_MODULE_MASK | CSARU_TYPE_MASK)) |
-			(generation & CSARU_GENERATION_MASK);
-	}
 	bool LoadTexture(SDL_Renderer *, SDL_RWops *);
 	void SetFlip (SDL_RendererFlip);
 

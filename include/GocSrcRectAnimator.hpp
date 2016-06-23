@@ -30,11 +30,6 @@ public: // Construction
 	~GocSrcRectAnimator ();
 
 public: // Commands
-	void SetGeneration (uint32_t generation) {
-		m_id =
-			(m_id & (CSARU_MODULE_MASK | CSARU_TYPE_MASK)) |
-			(generation & CSARU_GENERATION_MASK);
-	}
 	void Clear ();
 	void SetAnimation (const CSaru2d::TextureAnimation * anim);
 	void SetTargetRect (SDL_Rect * rectToAnimate) { m_targetRect = rectToAnimate; }

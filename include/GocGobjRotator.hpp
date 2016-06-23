@@ -23,11 +23,6 @@ public: // Construction
 	~GocGobjRotator ();
 
 public: // Commands
-	void SetGeneration (uint32_t generation) {
-		m_id =
-			(m_id & (CSARU_MODULE_MASK | CSARU_TYPE_MASK)) |
-			(generation & CSARU_GENERATION_MASK);
-	}
 	void SetRadiansPerSecond (float radians) { m_radiansPerSecond = radians; }
 
 public: // GameObjectComponent interface
