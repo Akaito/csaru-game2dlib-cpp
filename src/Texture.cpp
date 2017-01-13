@@ -1,6 +1,6 @@
 // NOTE: Much of this early code is taken from Lazy Foo's SDL tutorials at http://lazyfoo.net/tutorials/SDL/
 
-#include "../include/Texture.hpp"
+#include "exported/Texture.hpp"
 
 
 namespace CSaru2d {

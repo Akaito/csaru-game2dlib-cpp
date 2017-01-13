@@ -2,9 +2,9 @@
 
 #include <map>
 
-#include <csaru-core-cpp/csaru-core-cpp.h>
-#include <csaru-container-cpp/csaru-container-cpp.h>
-#include <csaru-datamap-cpp/csaru-datamap-cpp.h>
+#include <csaru-core-cpp/csaru-core-cpp.hpp>
+#include <csaru-container-cpp/csaru-container-cpp.hpp>
+#include <csaru-datamap-cpp/csaru-datamap-cpp.hpp>
 
 #include "ObjId.hpp"
 #include "GameObject.hpp"

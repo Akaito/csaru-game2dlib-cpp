@@ -1,4 +1,4 @@
-#include "../include/Level.hpp"
+#include "exported/Level.hpp"
 
 #include <cstring>
 
@@ -13,8 +13,8 @@
 #	include <SDL2/SDL_ttf.h>
 #endif
 
-#include "../include/GocSpriteSimple.hpp"
-#include "../include/GocGobjRotator.hpp"
+#include "exported/GocSpriteSimple.hpp"
+#include "exported/GocGobjRotator.hpp"
 
 namespace CSaruGame {
 

@@ -1,4 +1,4 @@
-#include "../include/GocSrcRectAnimator.hpp"
+#include "exported/GocSrcRectAnimator.hpp"
 
 #ifdef WIN32
 #	include <SDL.h>

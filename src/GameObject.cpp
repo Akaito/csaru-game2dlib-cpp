@@ -1,5 +1,5 @@
-#include "../include/GameObject.hpp"
-#include "../include/GameObjectComponent.hpp"
+#include "exported/GameObject.hpp"
+#include "exported/GameObjectComponent.hpp"
 
 #ifdef WIN32
 #	include <SDL.h>

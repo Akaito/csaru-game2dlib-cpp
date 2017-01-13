@@ -12,8 +12,9 @@ Debug
 Release
 *vcxproj*.user
 
+*.d
+*.o
 *.a
-Makefile
 
 # CMake
 CMakeCache.txt

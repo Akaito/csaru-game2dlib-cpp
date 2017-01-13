@@ -1,6 +1,6 @@
-#include "../include/TextureAnimation.hpp"
+#include "exported/TextureAnimation.hpp"
 
-#include <csaru-core-cpp/csaru-core-cpp.h>
+#include <csaru-core-cpp/csaru-core-cpp.hpp>
 
 namespace CSaru2d {
 

@@ -1,7 +1,7 @@
 #include <cml/cml.h>
 
-#include "../include/GameObject.hpp"
-#include "../include/GocSpriteSimple.hpp"
+#include "exported/GameObject.hpp"
+#include "exported/GocSpriteSimple.hpp"
 
 namespace CSaruGame {
 

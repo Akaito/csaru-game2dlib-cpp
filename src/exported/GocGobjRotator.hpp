@@ -1,6 +1,6 @@
 #pragma once
 
-#include <csaru-core-cpp/csaru-core-cpp.h>
+#include <csaru-core-cpp/csaru-core-cpp.hpp>
 
 #include "GameObjectComponent.hpp"
 

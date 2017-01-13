@@ -1,6 +1,6 @@
-#include "../include/GocGobjRotator.hpp"
-#include "../include/Transform.hpp"
-#include "../include/GameObject.hpp"
+#include "exported/GocGobjRotator.hpp"
+#include "exported/Transform.hpp"
+#include "exported/GameObject.hpp"
 
 /*
 #ifdef WIN32

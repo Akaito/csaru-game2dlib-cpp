@@ -1,6 +1,6 @@
 #pragma once
 
-#include <csaru-core-cpp/csaru-core-cpp.h>
+#include <csaru-core-cpp/csaru-core-cpp.hpp>
 
 #include "GameObjectComponent.hpp"
 #include "Texture.hpp" // TODO : Once a handle's in use, forward-declare needed bits instead?

@@ -9,7 +9,7 @@
 #	include <SDL2/SDL.h>
 #endif
 
-#include <csaru-container-cpp/csaru-container-cpp.h>
+#include <csaru-container-cpp/csaru-container-cpp.hpp>
 
 namespace CSaruGame {
 

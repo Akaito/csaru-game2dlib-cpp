@@ -1,4 +1,4 @@
-#include "../include/SDL_RWopsPhysicsFS.hpp"
+#include "exported/SDL_RWopsPhysicsFS.hpp"
 
 #include <cstddef> // size_t
 

@@ -5,9 +5,9 @@
 #	include <SDL2/SDL.h>
 #endif
 
-#include <csaru-core-cpp/csaru-core-cpp.h>
+#include <csaru-core-cpp/csaru-core-cpp.hpp>
 
-#include "../include/Timer.hpp"
+#include "exported/Timer.hpp"
 
 namespace CSaruGame {
 
