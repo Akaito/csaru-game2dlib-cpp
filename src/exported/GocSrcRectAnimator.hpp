@@ -11,8 +11,8 @@ namespace CSaruGame {
 
 class GocSrcRectAnimator : public GameObjectComponent {
 public: // ID
-	// 9XXX are miscellaneous gocs; easier debugging by module-local convention
-	// 92XX mostly interact with 2XXX (2d graphics) components
+	/// 9XXX are miscellaneous gocs; easier debugging by module-local convention.
+	/// 92XX mostly interact with 2XXX (2d graphics) components.
 	static const ObjId s_gocTypeId = CSARU_TYPE_ID(s_Module_Base, 0x9201);
 
 private: // Data

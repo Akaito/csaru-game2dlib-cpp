@@ -8,7 +8,10 @@ namespace CSaruGame {
 
 class GameObject;
 
-// GameObjectComponents must be guaranteed to not change address or delete while attached to a GameObject.
+/**
+ * GameObjectComponents must be guaranteed to not change address or delete while
+ * attached to a GameObject.
+ */
 class GameObjectComponent {
 protected: // Data
     ObjId        m_id;

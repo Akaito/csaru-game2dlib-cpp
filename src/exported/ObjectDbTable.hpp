@@ -15,7 +15,7 @@ namespace CSaruGame {
 
 enum class FindStyle {
 	FAIL = 0,
-	CREATE_NOW, // create object if not found; block until done
+	CREATE_NOW, // Create object if not found; block until done.
 };
 
 /*
